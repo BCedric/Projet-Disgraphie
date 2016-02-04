@@ -1,1 +1,8 @@
 c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.exe.config
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.exe
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.pdb
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.csprojResolveAssemblyReference.cache
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet_Disgraphie.Properties.Resources.resources
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.csproj.GenerateResource.Cache
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.exe
+c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.pdb
