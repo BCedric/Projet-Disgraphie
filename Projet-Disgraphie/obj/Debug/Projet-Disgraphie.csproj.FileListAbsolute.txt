@@ -6,3 +6,12 @@ c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\P
 c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.csproj.GenerateResource.Cache
 c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.exe
 c:\users\propriétaire\documents\visual studio 2013\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.pdb
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.exe.config
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.exe
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\Projet-Disgraphie.pdb
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.csprojResolveAssemblyReference.cache
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet_Disgraphie.Properties.Resources.resources
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.csproj.GenerateResource.Cache
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.exe
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\obj\Debug\Projet-Disgraphie.pdb
+C:\Users\Propriétaire\Documents\Visual Studio 2015\Projects\Projet-Disgraphie\Projet-Disgraphie\bin\Debug\WintabDN.dll
