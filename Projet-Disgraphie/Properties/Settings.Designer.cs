@@ -13,7 +13,7 @@ namespace Projet_Disgraphie.Properties
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
 
@@ -26,5 +26,11 @@ namespace Projet_Disgraphie.Properties
                 return defaultInstance;
             }
         }
+
+        public System.Windows.Forms.FormWindowState State { get; set; }
+
+        public System.Drawing.Point Location { get; set; }
+
+        public System.Drawing.Size Size { get; set; }
     }
 }

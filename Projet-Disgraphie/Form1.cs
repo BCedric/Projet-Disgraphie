@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Projet_Disgraphie.Datas;
+using Projet_Disgraphie.Drawing;
 using WintabDN;
 
 namespace Projet_Disgraphie
@@ -15,19 +17,13 @@ namespace Projet_Disgraphie
     {
         private CWintabContext m_logContext = null;
         private CWintabData m_wtData = null;
-        private UInt32 m_maxPkts = 1;   // max num pkts to capture/display at a time
-
-        private Int32 m_pkX = 0;
-        private Int32 m_pkY = 0;
-        private UInt32 m_pressure = 0;
-
         private Criteres gestionnaireDonnees = new Criteres();
 
 
-        /* 
-        private UInt32 m_pkTime = 0;
-        private UInt32 m_pkTimeLast = 0;
-        */
+        private DrawingThread drawingThread;
+        private Criteres criteres;
+
+
 
         // These constants can be used to force Wintab X/Y data to map into a
         // a 10000 x 10000 grid, as an example of mapping tablet data to values
@@ -35,45 +31,56 @@ namespace Projet_Disgraphie
         private const Int32 m_TABEXTX = 10000;
         private const Int32 m_TABEXTY = 10000;
 
+        public object TextBoxVitesseMoyenne { get; private set; }
+
         public Form1()
         {
             InitializeComponent();
+            InitData();
 
             bool controlSystemCursor = true;
             this.FormClosing += new FormClosingEventHandler(TestForm_FormClosing);
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             InitDataCapture(m_TABEXTX, m_TABEXTY, controlSystemCursor);
 
+        }
 
+        private void InitData()
+        {
+            drawingThread = new DrawingThread(this.picBoard);
+            drawingThread.Start();
+            criteres = new Criteres();
+            criteres.Start();
 
         }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Save();
         }
-
+       /*
         private void button1_Click(object sender, EventArgs e)
         {
-            /*
-                CloseCurrentContext();
-                Test_IsWintabAvailable();
-                Test_GetDeviceInfo();
-                Test_GetDefaultDigitizingContext();
-                Test_GetDefaultSystemContext();
-                Test_GetDefaultDeviceIndex();
-                Test_GetDeviceAxis();
-                Test_GetDeviceOrientation();
-                Test_GetDeviceRotation();
-                Test_GetNumberOfDevices();
-                Test_IsStylusActive();
-                Test_GetStylusName();
-                Test_GetExtensionMask();
-                Test_Context();
-                Test_DataPacketQueueSize();
-                Test_MaxPressure();
-                Test_GetDataPackets(1);
-                Test_QueryDataPackets();*/
-        }
+
+           // CloseCurrentContext();
+            Test_IsWintabAvailable();
+            Test_GetDeviceInfo();
+            Test_GetDefaultDigitizingContext();
+            Test_GetDefaultSystemContext();
+            Test_GetDefaultDeviceIndex();
+            Test_GetDeviceAxis();
+            Test_GetDeviceOrientation();
+            Test_GetDeviceRotation();
+            Test_GetNumberOfDevices();
+            Test_IsStylusActive();
+            Test_GetStylusName();
+            Test_GetExtensionMask();
+            Test_Context();
+            Test_DataPacketQueueSize();
+            Test_MaxPressure();
+            Test_GetDataPackets(1);
+            Test_QueryDataPackets();
+        }*/
         private void TestForm_FormClosing(Object sender, FormClosingEventArgs e)
         {
             CloseCurrentContext();
@@ -407,8 +414,6 @@ namespace Projet_Disgraphie
                 // Close context from any previous test.
                 CloseCurrentContext();
 
-
-
                 m_logContext = OpenTestSystemContext(ctxWidth_I, ctxHeight_I, ctrlSysCursor_I);
 
                 if (m_logContext == null)
@@ -491,29 +496,31 @@ namespace Projet_Disgraphie
 
             try
             {
-                if (m_maxPkts == 1)
+                uint pktID = (uint)eventArgs_I.Message.WParam;
+
+                WintabPacket pkt = m_wtData.GetDataPacket((uint)eventArgs_I.Message.LParam, pktID);
+
+                if (pkt.pkContext != 0)
                 {
-
-                    uint pktID = (uint)eventArgs_I.Message.WParam;
-
-                    WintabPacket pkt = m_wtData.GetDataPacket((uint)eventArgs_I.Message.LParam, pktID);
-                    //DEPRECATED WintabPacket pkt = m_wtData.GetDataPacket(pktID);
-
-                    if (pkt.pkContext != 0)
+                    if (pkt.pkNormalPressure != 0)
                     {
-                        m_pkX = pkt.pkX;
-                        m_pkY = pkt.pkY;
-                        m_pressure = pkt.pkNormalPressure;
+                        Point convertedP = picBoard.PointToClient(new Point(pkt.pkX, pkt.pkY));
+                        drawingThread.AddPoint(new DrawingPoint(convertedP.X, convertedP.Y, pkt.pkNormalPressure));
+                        criteres.AddPoint(new DataPoint(convertedP.X, convertedP.Y, DateTime.Now.Millisecond));
 
-                        gestionnaireDonnees.Ajouter(m_pkX, m_pkY);
-
-
-                        //String msg = "SCREEN: pkX: " + pkt.pkX + ", pkY:" + pkt.pkY + ", pressure: " + pkt.pkNormalPressure + " , tangent presure: " + pkt.pkTangentPressure;
-                        String msg = gestionnaireDonnees.GetCriteresToString();
-                        Console.WriteLine(msg);
-                        AfficherDonnee(msg);
                     }
+
+
+                   //String msg = "SCREEN: pkX: " + pkt.pkX + ", pkY:" + pkt.pkY + ", pressure: " + pkt.pkNormalPressure + " , tangent presure: " + pkt.pkTangentPressure;
+                   //   String msg = gestionnaireDonnees.GetCriteresToString();
+                    TextBoxVitesseActuelle.Text = criteres.GetVitesseActuelle().ToString();
+                    textBoxVitesseMoyenne.Text = criteres.GetVitesseMoyenne().ToString();
+                    textBoxNbPoint.Text = criteres.GetNbPoint().ToString();
+                    textBoxPression.Text = pkt.pkNormalPressure.ToString();
+                   // Console.WriteLine(msg);
+                   // AfficherDonnee(msg);
                 }
+
             }
             catch (Exception ex)
             {
@@ -536,9 +543,6 @@ namespace Projet_Disgraphie
             // so that it coincides with screen origin.
             logContext.OutExtY = -logContext.OutExtY;
         }
-
-
-
 
     }
 }
