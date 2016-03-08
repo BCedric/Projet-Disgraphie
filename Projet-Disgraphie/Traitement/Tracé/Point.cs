@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Projet_Disgraphie.Traitement
+namespace Projet_Disgraphie.Traitement.Tracé
 {
-    class Point
+    class Point : IComparable<Point>
     {
-        private double id;
+        public double id { get; }
         private double sn;
         private double t;
-        private double x;
-        private double y;
-        private double z;
+        public double x { get; }
+        public double y { get; }
+        public double z { get; }
         private double p;
         private double alt;
         private double azi;
@@ -33,5 +33,14 @@ namespace Projet_Disgraphie.Traitement
             this.twi = Convert.ToDouble(twi);
             this.lever = Convert.ToDouble(lever); 
         }
+
+        public int CompareTo(Point other)
+        {
+            if (this.id < other.id) return -1;
+            else return 1;
+            
+        }
+
+       
     }
 }
